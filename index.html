@@ -1,11 +1,78 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Biraz Sessiz Olur Musunuz</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      font-size: 24px; /* Yazılar büyütüldü */
+      margin: 20px;
+      background-color: white;
+      transition: background-color 0.5s ease;
+    }
+    #thankYouMessage {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 64px;
+      font-weight: bold;
+      color: #000;
+      background-color: #ffc0cb; /* Toz pembe */
+      padding: 40px 60px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+      z-index: 1000;
+    }
+    button {
+      font-size: 24px;
+      padding: 12px 24px;
+      margin: 20px 20px 20px 0;
+      cursor: pointer;
+      border-radius: 8px;
+      border: 2px solid #444;
+      background-color: #f0f0f0;
+      transition: transform 0.3s ease;
+      user-select: none;
+    }
+  </style>
 </head>
 <body>
-  <h1>Biraz Sessiz Olur Musunuz?</h1>
-  <p>~AFRA AYDIN~.</p>
+  <h1>Biraz Sessiz Olur Musunuz</h1>
+
+  <button id="btnSessiz">sessiz olamayız</button>
+  <button id="btnUyarı">tabiki uyardığın için sağol</button>
+
+  <div id="thankYouMessage">Teşekkürler</div>
+
+  <audio id="backgroundMusic" src="https://cdn.pixabay.com/download/audio/2022/03/30/audio_4a59b297f0.mp3?filename=soft-music-11089.mp3" autoplay loop></audio>
+
+  <script>
+    const btnSessiz = document.getElementById('btnSessiz');
+    const btnUyari = document.getElementById('btnUyarı');
+    const thankYouMessage = document.getElementById('thankYouMessage');
+    const body = document.body;
+
+    btnSessiz.addEventListener('click', () => {
+      // Mevcut scale değerini alalım, default 1
+      let style = window.getComputedStyle(btnUyari);
+      let matrix = new WebKitCSSMatrix(style.transform);
+      let currentScale = matrix.a || 1;
+
+      // 0.3 saniyede %50 büyüt
+      let newScale = currentScale + 0.5;
+
+      btnUyari.style.transform = `scale(${newScale})`;
+    });
+
+    btnUyari.addEventListener('click', () => {
+      thankYouMessage.style.display = 'block';
+      body.style.backgroundColor = '#ffc0cb';
+      btnSessiz.style.display = 'none';
+      btnUyari.style.display = 'none';
+    });
+  </script>
 </body>
 </html>
