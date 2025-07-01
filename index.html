@@ -25,6 +25,25 @@
       border-radius: 15px;
       box-shadow: 0 0 20px rgba(0,0,0,0.3);
       z-index: 1000;
+      width: max-content;
+      min-width: 400px;
+      min-height: 150px;
+      box-sizing: border-box;
+      position: fixed;  /* Burada zaten position var, bunu relative ile değiştirip içine absolute koyacağız */
+    }
+    /* Position relative ekleyip içine absolute yerleştireceğiz */
+    #thankYouMessage.relative {
+      position: fixed;
+    }
+    #madeBy {
+      position: absolute;
+      bottom: 10px;
+      right: 15px;
+      font-size: 16px;
+      font-weight: normal;
+      color: #555;
+      font-style: italic;
+      user-select: none;
     }
     button {
       font-size: 24px;
@@ -45,5 +64,32 @@
   <button id="btnSessiz">sessiz olamayız</button>
   <button id="btnUyarı">tabiki uyardığın için sağol</button>
 
-  <div id="thankYouMessage">Teşekkürler</div>
+  <div id="thankYouMessage" class="relative">
+    Teşekkürler
+    <div id="madeBy">~MADE BY AFRA AYDIN~</div>
+  </div>
+
+  <script>
+    const btnSessiz = document.getElementById('btnSessiz');
+    const btnUyari = document.getElementById('btnUyarı');
+    const thankYouMessage = document.getElementById('thankYouMessage');
+    const body = document.body;
+
+    btnSessiz.addEventListener('click', () => {
+      let style = window.getComputedStyle(btnUyari);
+      let matrix = new WebKitCSSMatrix(style.transform);
+      let currentScale = matrix.a || 1;
+      let newScale = currentScale + 0.5;
+      btnUyari.style.transform = `scale(${newScale})`;
+    });
+
+    btnUyari.addEventListener('click', () => {
+      thankYouMessage.style.display = 'block';
+      body.style.backgroundColor = '#ffc0cb';
+      btnSessiz.style.display = 'none';
+      btnUyari.style.display = 'none';
+    });
+  </script>
+</body>
+</html>
 
