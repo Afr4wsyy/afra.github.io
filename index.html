@@ -47,32 +47,3 @@
 
   <div id="thankYouMessage">Teşekkürler</div>
 
-  <audio id="backgroundMusic" src="https://cdn.pixabay.com/download/audio/2022/03/30/audio_4a59b297f0.mp3?filename=soft-music-11089.mp3" autoplay loop></audio>
-
-  <script>
-    const btnSessiz = document.getElementById('btnSessiz');
-    const btnUyari = document.getElementById('btnUyarı');
-    const thankYouMessage = document.getElementById('thankYouMessage');
-    const body = document.body;
-
-    btnSessiz.addEventListener('click', () => {
-      // Mevcut scale değerini alalım, default 1
-      let style = window.getComputedStyle(btnUyari);
-      let matrix = new WebKitCSSMatrix(style.transform);
-      let currentScale = matrix.a || 1;
-
-      // 0.3 saniyede %50 büyüt
-      let newScale = currentScale + 0.5;
-
-      btnUyari.style.transform = `scale(${newScale})`;
-    });
-
-    btnUyari.addEventListener('click', () => {
-      thankYouMessage.style.display = 'block';
-      body.style.backgroundColor = '#ffc0cb';
-      btnSessiz.style.display = 'none';
-      btnUyari.style.display = 'none';
-    });
-  </script>
-</body>
-</html>
