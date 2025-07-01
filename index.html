@@ -76,20 +76,3 @@
   </script>
 </body>
 </html>
-const backgroundMusic = document.getElementById('backgroundMusic');
-
-btnSessiz.addEventListener('click', () => {
-  // Müziği başlat
-  if (backgroundMusic.paused) {
-    backgroundMusic.play().catch(e => {
-      console.log('Otomatik oynatma engellendi:', e);
-    });
-  }
-
-  // Mevcut scale işlemi burada devam eder...
-  let style = window.getComputedStyle(btnUyari);
-  let matrix = new WebKitCSSMatrix(style.transform);
-  let currentScale = matrix.a || 1;
-  let newScale = currentScale + 0.5;
-  btnUyari.style.transform = `scale(${newScale})`;
-});
